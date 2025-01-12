@@ -1,0 +1,22 @@
+There are total of 5w+ rows in the NashvilleHousing dataset.
+I encountered many problems when importing the data because of the data format.
+If there are many warnings when dealing with a certain column, the fastest way I think is to import as 'txt' format and then deal with the format in the SQL.
+
+So in this project, I first standardized the data format. Mainly used CONVERT() function.
+
+Then populated PropertyAddress data. I found that there are some rules between ParcelID and PropertyAddress.
+So I used JOIN() function to update this column information.
+
+Next I broke out Address into Individual Columns. These address data includes street, city, and state information in one column. 
+So I broke them into 3 individual columns, which would be convenient for future analysis.
+Mainly used SUBSTRING(), LOCATE(), SUBSTRING_INDEX() function.
+
+In the SoldAsVaccant column, I found that there were 'Y','N','Yes','No'. I hope they can be consistent.
+Mainly used CASE WHEN function.
+
+Looking through the data, some rows were probably duplicates.
+I used ROW_NUMBER() and PARTITION BY() to find the duplicates, used CTE to store the temp data.
+But MySQL can't delete data directly through CTE. So I used JOIN() function to delete duplicates.
+
+Lastly deleted some unused columns.
+Noted MySQL can't drop multiple columns at one time, must drop one by one.
